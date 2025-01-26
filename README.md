@@ -25,12 +25,12 @@ This tool is useful for managing local galleries by providing metadata such as t
 
 For **Linux/macOS**:
 ```bash
-git clone <repository-url> && cd <repository-directory> && python -m venv venv && source venv/bin/activate && pip install -r requirements.txt
+git clone https://github.com/Torrafox/e621-metadata-extractor.git && cd e621-metadata-extractor && python -m venv venv && source venv/bin/activate && pip install -r requirements.txt
 ```
 
 For **Windows**:
 ```bash
-git clone <repository-url> && cd <repository-directory> && python -m venv venv && venv\Scripts\activate && pip install -r requirements.txt
+git clone https://github.com/Torrafox/e621-metadata-extractor.git && cd e621-metadata-extractor && python -m venv venv && venv\Scripts\activate && pip install -r requirements.txt
 ```
 
 <details>
@@ -43,8 +43,8 @@ git clone <repository-url> && cd <repository-directory> && python -m venv venv &
 
 1. **Clone the Repository**:
    ```bash
-   git clone <repository-url>
-   cd <repository-directory>
+   git clone https://github.com/Torrafox/e621-metadata-extractor.git
+   cd e621-metadata-extractor
    ```
 
 2. **Set Up Virtual Environment**:
@@ -108,7 +108,7 @@ from e621_metadata_extractor.extractor import process_directory
 # Example usage
 dump_url = get_latest_dump_url()
 download_file(dump_url, "posts_dump.csv.gz")
-process_directory("path_to_directory", "posts_dump.csv.gz", "output.csv")
+process_directory("/path/to/e621/media/folder", "posts_dump.csv.gz", "output.csv")
 ```
 
 

@@ -1,0 +1,4 @@
+{
+    "data_directory": "/path/to/your/e621/media/folder",
+    "export_json": false
+}

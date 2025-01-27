@@ -25,12 +25,12 @@ This tool is useful for managing local galleries by providing metadata such as t
 
 For **Linux/macOS**:
 ```bash
-git clone https://github.com/Torrafox/e621-metadata-extractor.git && cd e621-metadata-extractor && python -m venv venv && source venv/bin/activate && pip install -r requirements.txt
+git clone https://github.com/Torrafox/e621-metadata-extractor.git && cd e621-metadata-extractor && python -m venv venv && source venv/bin/activate && pip install -e .
 ```
 
 For **Windows**:
 ```bash
-git clone https://github.com/Torrafox/e621-metadata-extractor.git && cd e621-metadata-extractor && python -m venv venv && venv\Scripts\activate && pip install -r requirements.txt
+git clone https://github.com/Torrafox/e621-metadata-extractor.git && cd e621-metadata-extractor && python -m venv venv && venv\Scripts\activate && pip install -e .
 ```
 
 <details>

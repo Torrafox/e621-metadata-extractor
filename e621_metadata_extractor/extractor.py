@@ -2,9 +2,10 @@ import os
 import time
 import polars as pl
 from tqdm import tqdm
-from e621_metadata_extractor.utils import calculate_md5
+from e621_metadata_extractor.utils import calculate_md5, calculate_oshash
 
-def process_directory(directory, posts_dump_path, tags_dump_path, output_csv_path, export_json=False):
+def process_directory(directory, posts_dump_path, tags_dump_path, output_csv_path,
+                      export_json=False, gen_url_col=True, gen_artist_col=True, gen_oshash_col=False):
     """
     Processes files in a directory, matches them with e621 metadata, and writes to a CSV.
     Optionally exports the results to a JSON file if export_json is True.
@@ -45,40 +46,42 @@ def process_directory(directory, posts_dump_path, tags_dump_path, output_csv_pat
                 progress_bar.update(1)
                 continue
 
+            # Check if the file's MD5 hash matches any row in the e621 metadata
             row = md5_to_row_map.get(file_md5, None)
             if not row:
                 progress_bar.update(1)
                 continue
 
-            # Add a "post_url" column dynamically
-            row["post_url"] = f"https://e621.net/posts/{row['id']}"
+            if gen_url_col:
+                row["post_url"] = f"https://e621.net/posts/{row['id']}"
 
-            # Split the tags string into individual tags
-            tags_list = row["tag_string"].split()
+            if gen_artist_col:
+                tags_list = row["tag_string"].split()
+                excluded_tags = {
+                    "avoid_posting",
+                    "conditional_dnp",
+                    "epilepsy_warning",
+                    "jumpscare_warning",
+                    "motion_sickness_warning",
+                    "sound_warning",
+                    "third-party_edit",
+                    "unknown_artist"
+                }
+                artist_tags = [
+                    tag.replace("_(artist)", "")  # Remove the suffix _(artist)
+                    for tag in tags_list
+                    if tag in tag_names_set and tag not in excluded_tags
+                ]
 
-            # Use list comprehension to filter matching tags, excluding specific tags
-            excluded_tags = {
-                "avoid_posting",
-                "conditional_dnp",
-                "epilepsy_warning",
-                "jumpscare_warning",
-                "motion_sickness_warning",
-                "sound_warning",
-                "third-party_edit",
-                "unknown_artist"
-            }
+                # Join the artist tags back into a space-separated string
+                artist_string = " ".join(artist_tags)
 
-            artist_tags = [
-                tag.replace("_(artist)", "")  # Remove the suffix _(artist)
-                for tag in tags_list
-                if tag in tag_names_set and tag not in excluded_tags
-            ]
+                # Add a "artist_string" column to the row
+                row["artist_string"] = artist_string
 
-            # Join the artist tags back into a space-separated string
-            artist_string = " ".join(artist_tags)
-
-            # Add a "artist_string" column to the row
-            row["artist_string"] = artist_string
+            if gen_oshash_col:
+                file_oshash = calculate_oshash(file_path)
+                row["oshash"] = file_oshash if file_oshash else ""
 
             # Append the entire row (with the new column) to the results
             results.append(row)

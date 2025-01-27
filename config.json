@@ -1,4 +1,7 @@
 {
     "data_directory": "/path/to/your/e621/media/folder",
-    "export_json": false
+    "export_json": false,
+    "generate_artist_column": true,
+    "generate_post_url_column": true,
+    "generate_oshash_column": false
 }

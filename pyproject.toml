@@ -4,13 +4,14 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "e621_metadata_extractor"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
     "requests",
     "beautifulsoup4",
     "tqdm",
     "polars",
-    "pyarrow"
+    "pyarrow",
+    "oshash"
 ]
 requires-python = ">=3.8"
 authors = [

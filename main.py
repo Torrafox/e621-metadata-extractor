@@ -51,8 +51,12 @@ def main():
     output_csv_path = output_csv_name # Save in project directory
     #output_csv_path = os.path.join(gallery_path, output_csv_name) # Save in gallery directory
     export_json = CONFIG.get("export_json", False)
+    gen_url_col = CONFIG.get("generate_post_url_column", True)
+    gen_artist_col = CONFIG.get("generate_artist_column", True)
+    gen_oshash_col = CONFIG.get("generate_oshash_column", False)
 
-    process_directory(gallery_path, posts_dump_save_path, tags_dump_save_path, output_csv_path, export_json)
+    process_directory(gallery_path, posts_dump_save_path, tags_dump_save_path, output_csv_path,
+                      export_json, gen_url_col, gen_artist_col, gen_oshash_col)
 
 if __name__ == "__main__":
     try:

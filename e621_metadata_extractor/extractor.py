@@ -5,7 +5,8 @@ from tqdm import tqdm
 from e621_metadata_extractor.utils import calculate_md5, calculate_oshash
 
 def process_directory(directory, posts_dump_path, tags_dump_path, output_csv_path,
-                      export_json=False, gen_url_col=True, gen_artist_col=True, gen_oshash_col=False):
+                      export_json=False, gen_url_col=True, gen_artist_col=True, gen_oshash_col=False,
+                      print_size_error=False):
     """
     Processes files in a directory, matches them with e621 metadata, and writes to a CSV.
     Optionally exports the results to a JSON file if export_json is True.
@@ -80,7 +81,7 @@ def process_directory(directory, posts_dump_path, tags_dump_path, output_csv_pat
                 row["artist_string"] = artist_string
 
             if gen_oshash_col:
-                file_oshash = calculate_oshash(file_path)
+                file_oshash = calculate_oshash(file_path, print_size_error)
                 row["oshash"] = file_oshash if file_oshash else ""
 
             # Append the entire row (with the new column) to the results

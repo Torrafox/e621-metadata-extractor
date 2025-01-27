@@ -16,7 +16,7 @@ def calculate_md5(file_path):
         print(f"Error calculating MD5 for {file_path}: {e}")
         return None
     
-def calculate_oshash(file_path):
+def calculate_oshash(file_path, print_size_error=False):
     """
     Calculates the OSHash (Open Semantic Hash) of a given file.
 
@@ -34,7 +34,8 @@ def calculate_oshash(file_path):
         
         return oshash.oshash(file_path)
     except ValueError as ve:
-        print(f"OSHash calculation skipped for file '{file_path}': {ve}")
+        if print_size_error:
+            print(f"OSHash calculation skipped for file '{file_path}': {ve}")
         return None
     except Exception as e:
         print(f"Error calculating OSHash for file '{file_path}': {e}")

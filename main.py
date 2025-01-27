@@ -56,7 +56,8 @@ def main():
     gen_oshash_col = CONFIG.get("generate_oshash_column", False)
 
     process_directory(gallery_path, posts_dump_save_path, tags_dump_save_path, output_csv_path,
-                      export_json, gen_url_col, gen_artist_col, gen_oshash_col)
+                      export_json, gen_url_col, gen_artist_col, gen_oshash_col,
+                      print_size_error=True)
 
 if __name__ == "__main__":
     try:

@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "e621_metadata_extractor"
+version = "0.1.0"
+dependencies = [
+    "requests",
+    "beautifulsoup4",
+    "tqdm",
+    "polars",
+    "pyarrow"
+]
+requires-python = ">=3.8"
+authors = [
+  {name = "Torrafox", email = "torrafox@gmail.com"},
+]
+maintainers = [
+  {name = "Torrafox", email = "torrafox@gmail.com"},
+]
+description = "Lovely Spam! Wonderful Spam!"
+readme = "README.md"
+license = { file = "LICENSE" }
+keywords = ["e621", "metadata", "extractor", "exporter", "importer", "scraper"]
+
+[project.urls]
+Homepage = "https://github.com/Torrafox/e621-metadata-extractor"
+Repository = "https://github.com/Torrafox/e621-metadata-extractor.git"
+"Bug Tracker" = "https://github.com/Torrafox/e621-metadata-extractor/issues"

@@ -105,6 +105,7 @@ def process_directory(directory, posts_dump_path, tags_dump_path, output_csv_pat
     if results:
         print(f"\nWriting results to {output_csv_path}...")
         results_df = pl.DataFrame(results)
+        results_df = results_df.sort("id")
         results_df.write_csv(output_csv_path)
         print(f"Processing complete! Results saved to {output_csv_path}.")
 

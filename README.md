@@ -2,15 +2,15 @@
 
 ## Overview
 
-**e621 Metadata Fetcher and Extractor** is a tool for downloading and processing metadata dumps from [e621](https://e621.net). It matches local files against the e621 metadata dump and generates a clean CSV file containing the relevant metadata.
+**e621 Metadata Fetcher and Extractor** is a tool for downloading and processing database exports from [e621](https://e621.net). It matches local files against the e621 data export and generates a clean CSV file containing the relevant metadata.
 
 This tool is useful for managing local galleries by providing metadata such as tags, ratings, descriptions, and more.
 
 
 ## Features
 
-- Fetch the latest metadata dump from e621.
-- Process local files in a directory by matching their MD5 checksums against the dump.
+- Fetch the latest database exports from e621.
+- Process local files in a directory by matching their MD5 checksums against the data export.
 - Extract relevant metadata (e.g., tags, ratings, URLs) into a CSV and JSON file.
 
 
@@ -93,7 +93,7 @@ python main.py
 
 By default, the script:
 
-1. Downloads the latest metadata dump from e621.
+1. Downloads the latest database exports (posts and tags) from e621.
 2. Processes a specified directory of files.
 3. Outputs the extracted metadata to e621_metadata.csv.
 
@@ -102,13 +102,14 @@ By default, the script:
 The repository can also be used as a library in other Python projects. Import the necessary functions:
 
 ```python
-from e621_metadata_extractor.fetcher import get_latest_dump_url, download_file
+from e621_metadata_extractor.fetcher import get_latest_dump_urls, download_file
 from e621_metadata_extractor.extractor import process_directory
 
 # Example usage
-dump_url = get_latest_dump_url()
-download_file(dump_url, "posts_dump.csv.gz")
-process_directory("/path/to/e621/media/folder", "posts_dump.csv.gz", "output.csv")
+dump_urls = get_latest_dump_urls()
+download_file(dump_urls.get("posts"), "posts_dump.csv.gz")
+download_file(dump_urls.get("tags"), "tags_dump.csv.gz")
+process_directory("/path/to/e621/media/folder", "posts_dump.csv.gz", "tags_dump.csv.gz", "output.csv")
 ```
 
 
